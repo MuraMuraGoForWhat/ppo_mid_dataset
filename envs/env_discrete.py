@@ -1,21 +1,11 @@
-"""
-# @Time    : 2021/7/2 5:22 下午
-# @Author  : hezhiqiang
-# @Email   : tinyzqh@163.com
-# @File    : env_discrete.py
-"""
 
 import gym
 from gym import spaces
 import numpy as np
 from envs.env_core import EnvCore
 from envs.new_env import TopEnvironment
-
 from envs.env_without_fairness import TopEnvironmentW
-from envs.env_without_fairness_1 import TopEnvironmentW_1
-from envs.env_without_fairness_2 import TopEnvironmentW_2
-from envs.env_without_fairness_3 import TopEnvironmentW_3
-from envs.env_without_fairness_8 import TopEnvironmentW_8
+
 
 
 class DiscreteActionEnv(object):
@@ -40,14 +30,6 @@ class DiscreteActionEnv(object):
         elif select == 1:
             self.env = TopEnvironmentW_1(gamma=np.power(0.5, 1. / 3600), drivers_num=agent_num)
 
-        elif select == 2:
-            self.env = TopEnvironmentW_2(gamma=np.power(0.5, 1. / 3600), drivers_num=agent_num)
-
-        elif select == 3:
-            self.env = TopEnvironmentW_3(gamma=np.power(0.5, 1. / 3600), drivers_num=agent_num)
-
-        elif select == 8:
-            self.env = TopEnvironmentW_8(gamma=np.power(0.5, 1. / 3600), drivers_num=agent_num)
 
         self.num_agent = self.env.agent_num
 

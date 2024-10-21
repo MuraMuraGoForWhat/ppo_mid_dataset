@@ -256,7 +256,7 @@ def get_config():
     parser.add_argument(
         "--hidden_size",
         type=int,
-        default=128,
+        default=256,
         help="Dimension of hidden layers for actor/critic networks",
     )
     parser.add_argument(
@@ -314,11 +314,11 @@ def get_config():
     )
 
     # optimizer parameters
-    parser.add_argument("--lr", type=float, default=6e-4, help="learning rate (default: 5e-4)")
+    parser.add_argument("--lr", type=float, default=5e-4, help="learning rate (default: 5e-4)")
     parser.add_argument(
         "--critic_lr",
         type=float,
-        default=1e-4,
+        default=5e-4,
         help="critic learning rate (default: 5e-4)",
     )
     parser.add_argument(

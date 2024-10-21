@@ -1,25 +1,39 @@
 import pandas as pd
+
+# 读取CSV文件
+# df = pd.read_csv('bay_vio_data_03_19.csv')
+#
+# # 更新 'aim_maker' 列
+# def update_aim_maker(row):
+#     # 提取 street_marker 列的数字部分
+#     street_number = int(row['street_marker'][1:])
+#     aim_num = int(row['aim_marker'][1:])
+#     if aim_num < 5000:
+#         print(aim_num)
+#     # 计算 aim_maker 新的值
+#     new_aim_number = street_number + 5000
+#     # 返回新的 aim_maker 值
+#     return 'A' + str(new_aim_number)
+#
+# # 应用函数到每一行
+# df['aim_marker'] = df.apply(update_aim_maker, axis=1)
+
+# 将修改后的DataFrame保存回CSV文件
+
 import csv
 
-# 读取第一个文件
-file1 = pd.read_csv('bay_vio_data_03_19.csv')
+def create_mapping(filename):
+    mapping = {}
 
-# 提取所有出现过的 street_marker 和 aim_marker
-markers = set(file1['street_marker']).union(set(file1['aim_marker']))
+    with open(filename, 'r') as file:
+        reader = csv.DictReader(file)
+        for row_number, row in enumerate(reader):
+            aim_marker = row['aim_marker']
+            if aim_marker.startswith('A'):
+                aim_marker = int(aim_marker[1:])  # 去掉"A"并转换为int
+                mapping[row_number] = aim_marker
 
-# 打开第二个文件进行逐行读取
-with open('dis_CBD_twoPs_03_19.csv', 'r') as infile, open('dis_CBD_twoPs_03_19.csv', 'w', newline='') as outfile:
-    reader = csv.DictReader(infile)
-    writer = csv.DictWriter(outfile, fieldnames=reader.fieldnames)
-    writer.writeheader()
+    return mapping
 
-    for row in reader:
-        try:
-          start, end = row['twoPs'].split('_')
-        except ValueError:
-          continue
-        if start in markers and end in markers:
-            print(start,end,"\n")
-            writer.writerow(row)
-
-print("Filtered data has been written to 'dis_CBD_twoPs_03_19.csv'")
+Mapping = create_mapping("C:\\Users\\ASUS\\Favorites\\pythonProject4\\ppo_railing_midset\\data\\bay_vio_data_03_19.csv")
+print(Mapping)

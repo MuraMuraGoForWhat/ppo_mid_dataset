@@ -13,7 +13,7 @@ def create_graph():
     project_dir = os.path.dirname(os.getcwd())
     data_dir = project_dir + '/data'
     # 读取CSV文件
-    data = pd.read_csv(data_dir + '/dis_CBD_twoPs_03_19.csv')
+    data = pd.read_csv('C:\\Users\\ASUS\\Favorites\\pythonProject4\\ppo_railing_midset\\data\\dis_CBD_twoPs_03_19.csv')
     # 创建一个无向图
     graph = nx.Graph()
 
@@ -51,7 +51,7 @@ def choose_random_node(graph):
 import pandas as pd
 def import_requests_from_csv():
     project_dir = os.path.dirname(os.getcwd())
-    file_path = project_dir + "/data/bay_vio_data_03_19(2).csv"
+    file_path = project_dir + "/data/bay_vio_data_03_19.csv"
     requests = [[]]
     data = pd.read_csv(file_path)
     for row in data.itertuples(index=False):
@@ -111,6 +111,8 @@ def load_budget():
     array = np.load(file_path)
     return array
 
+print(load_budget())
+
 def load_location():
     project_dir = os.path.dirname(os.getcwd())
     file_path = project_dir +'/data/init_location.npy'
@@ -123,10 +125,12 @@ def load_minuium_budget():
     array = np.load(file_path)
     return array
 
-def get_random():
-    return [random.randint(0, 999) for _ in range(20)]
+def generate_npy():
+    random_ints = np.random.randint(0,5000,size = 25)
+    project_dir = os.path.dirname(os.getcwd())
+    file_path = project_dir + '/data/init_location.npy'
+    np.save(file_path,random_ints)
 
+def get_random():
+    return [random.randint(0, 999) for _ in range(15)]
 random_list=get_random()
-print(load_budget())
-load_location()
-load_location()
