@@ -494,4 +494,11 @@ def get_config():
         help="by default None. set the path to pretrained model.",
     )
 
+    parser.add_argument("--count", type=int, default=300, help="specify the name of environment")
+
+    parser.add_argument("--speed", type=int, default=5000, help="specify the name of environment")
+
+    parser.add_argument("--obs_dim", type=int, default=4, help="specify the name of environment")
+
+
     return parser

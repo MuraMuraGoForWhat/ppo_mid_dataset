@@ -1,11 +1,10 @@
-
 import gym
 from gym import spaces
 import numpy as np
 from envs.env_core import EnvCore
 from envs.new_env import TopEnvironment
-from envs.env_without_fairness import TopEnvironmentW
-
+from envs.experiment_using_fvr_as_fairness_definition import TopEnvironmentW
+from envs.experiment_using_min_max_as_fairness_definition import TopEnvironmentW_1
 
 
 class DiscreteActionEnv(object):
@@ -24,12 +23,13 @@ class DiscreteActionEnv(object):
             self.signal_action_dim = 101
             '''
 
-    def __init__(self, agent_num, select):
+    def __init__(self, agent_num, select, count, speed, obs_dim):
         if select == 0:
-            self.env = TopEnvironmentW(gamma=np.power(0.5, 1. / 3600), drivers_num=agent_num)
+            self.env = TopEnvironmentW(gamma=np.power(0.5, 1. / 3600), drivers_num=agent_num, count=count, speed=speed,
+                                       obs_dim=obs_dim)
         elif select == 1:
-            self.env = TopEnvironmentW_1(gamma=np.power(0.5, 1. / 3600), drivers_num=agent_num)
-
+            self.env = TopEnvironmentW_1(gamma=np.power(0.5, 1. / 3600), drivers_num=agent_num, count=count,
+                                         speed=speed, obs_dim=obs_dim)
 
         self.num_agent = self.env.agent_num
 

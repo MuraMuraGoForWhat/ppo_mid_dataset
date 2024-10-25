@@ -11,13 +11,10 @@ import shutil
 
 def create_graph():
     project_dir = os.path.dirname(os.getcwd())
-    data_dir = project_dir + '/data'
-    # 读取CSV文件
-    data = pd.read_csv('C:\\Users\\ASUS\\Favorites\\pythonProject4\\ppo_railing_midset\\data\\dis_CBD_twoPs_03_19.csv')
-    # 创建一个无向图
+    file_path = project_dir +'data/dis_CBD_twoPs_03_19.csv'
+    data = pd.read_csv(file_path)
     graph = nx.Graph()
 
-    # 添加节点和边
     for row in data.itertuples(index=False):
         dis = row.distance
         nodes = row.twoPs.split('_')
@@ -121,7 +118,7 @@ def load_location():
 
 def load_minuium_budget():
     project_dir = os.path.dirname(os.getcwd())
-    file_path = project_dir +'/data/fairness_values_reassign.npy'
+    file_path = project_dir +'/data/fairness_min_max.npy'
     array = np.load(file_path)
     return array
 

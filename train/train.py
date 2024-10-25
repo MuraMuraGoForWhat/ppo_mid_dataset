@@ -31,7 +31,7 @@ def make_train_env(all_args,select):
         def init_env():
             from envs.env_discrete import DiscreteActionEnv
 
-            env = DiscreteActionEnv(all_args.num_agents,select)
+            env = DiscreteActionEnv(all_args.num_agents,select,count=all_args.count,speed=all_args.speed,obs_dim=all_args.obs_dim)
 
             env.seed(all_args.seed + rank * 1000)
             return env
@@ -175,4 +175,4 @@ def main(args,select):
 
 if __name__ == "__main__":
 
-        main(sys.argv[1:],0)
+        main(sys.argv[1:],1)

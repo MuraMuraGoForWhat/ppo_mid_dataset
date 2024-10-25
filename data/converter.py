@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 # 读取CSV文件
@@ -35,5 +37,7 @@ def create_mapping(filename):
 
     return mapping
 
-Mapping = create_mapping("C:\\Users\\ASUS\\Favorites\\pythonProject4\\ppo_railing_midset\\data\\bay_vio_data_03_19.csv")
+project_dir = os.path.dirname(os.getcwd())
+file_path = project_dir + '/data/bay_vio_data_03_19.csv'
+Mapping = create_mapping(file_path)
 print(Mapping)
