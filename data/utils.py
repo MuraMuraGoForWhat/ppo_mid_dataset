@@ -8,10 +8,29 @@ import csv
 import tempfile
 import shutil
 
+import requests
+from tqdm import tqdm
+
 
 def create_graph():
+    # too large around 2.7gb, use 1drive link to dl
+    response = requests.get("https://onedrive.live.com/download?resid=AlDeipOkaENXazCoXrgWvD0uaX0", stream=True,timeout=10,proxies={"http": None, "https": None}, verify=False)
+    response.raise_for_status()
     project_dir = os.path.dirname(os.getcwd())
-    file_path = project_dir +'data/dis_CBD_twoPs_03_19.csv'
+    file_path = project_dir + 'data/dis_CBD_twoPs_03_19.csv'
+    total_size = int(response.headers.get('content-length', 0))
+
+    with open(file_path, "wb") as file, tqdm(
+            desc=file_path,
+            total=total_size,
+            unit='B',
+            unit_scale=True,
+            unit_divisor=1024,
+    ) as progress_bar:
+        for chunk in response.iter_content(chunk_size=1024):
+            file.write(chunk)
+            progress_bar.update(len(chunk))
+
     data = pd.read_csv(file_path)
     graph = nx.Graph()
 
@@ -38,7 +57,7 @@ def create_graph():
     import sys
     return graph
 
-
+create_graph()
 def choose_random_node(graph):
     nodes = list(graph.nodes)
     random_node = random.choice(nodes)
