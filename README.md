@@ -1,4 +1,4 @@
-# Budgted Reinforcement Learning For Fairness In Real Time Dispatching System
+# Budgted-Reinforcement-Learning-For-Fairness-In-Real-Time-Dispatching-System
 
 The repo includes the code for the paper Budgted Reinforcement Learning For Fairness In Real Time Dispatching System. The code can be executed with the command:
 
