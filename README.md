@@ -1,6 +1,6 @@
-# budgted_reinforcement_learning_for_fairness_in_real_time_dispatching_system
+# Budgted Reinforcement Learning For Fairness In Real Time Dispatching System
 
-The repo includes the code for the paper budgted_reinforcement_learning_for_fairness_in_real_time_dispatching_system. The code can be executed with the command:
+The repo includes the code for the paper Budgted Reinforcement Learning For Fairness In Real Time Dispatching System. The code can be executed with the command:
 
 ```python
 python train.py
