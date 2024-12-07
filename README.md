@@ -3,10 +3,13 @@
 The repo includes the code for the paper Budgted Reinforcement Learning For Fairness In Real Time Dispatching System. The code can be executed with the command:
 
 ```python
-python train.py
+python train.py --select 1
+
+
 ```
 
-At line 178 of python file train/train.py:  parameter 0 means experiment_using_fvr_as_fairness_definition; 1 means experiment_using_min_max_as_fairness_definition
+select 0 means experiment_using_fvr_as_fairness_definition; 
+select 1 means experiment_using_min_max_as_fairness_definition
 
 /data/fairness.npy: fvr budget
 /data/fairness_min_max: min_max budget
