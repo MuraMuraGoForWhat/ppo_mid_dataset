@@ -1,9 +1,4 @@
-"""
-# @Time    : 2021/6/30 10:07 下午
-# @Author  : hezhiqiang
-# @Email   : tinyzqh@163.com
-# @File    : train.py
-"""
+
 
 # !/usr/bin/env python
 import sys
@@ -13,6 +8,7 @@ import setproctitle
 import numpy as np
 from pathlib import Path
 import torch
+import argparse
 
 # Get the parent directory of the current file
 parent_dir = os.path.abspath(os.path.join(os.getcwd(), "../"))
@@ -26,12 +22,14 @@ from envs.env_wrappers import DummyVecEnv
 """Train script for MPEs."""
 
 
-def make_train_env(all_args,select):
+def make_train_env(all_args, select):
     def get_env_fn(rank):
         def init_env():
             from envs.env_discrete import DiscreteActionEnv
 
-            env = DiscreteActionEnv(all_args.num_agents,select,count=all_args.count,speed=all_args.speed,obs_dim=all_args.obs_dim)
+            env = DiscreteActionEnv(
+                all_args.num_agents, select, count=all_args.count, speed=all_args.speed, obs_dim=all_args.obs_dim
+            )
 
             env.seed(all_args.seed + rank * 1000)
             return env
@@ -69,7 +67,7 @@ def parse_args(args, parser):
     return all_args
 
 
-def main(args,select):
+def main(args, select):
     parser = get_config()
     all_args = parse_args(args, parser)
 
@@ -142,7 +140,7 @@ def main(args,select):
     np.random.seed(all_args.seed)
 
     # env init
-    envs = make_train_env(all_args,select)
+    envs = make_train_env(all_args, select)
     eval_envs = make_eval_env(all_args) if all_args.use_eval else None
     num_agents = all_args.num_agents
 
@@ -174,5 +172,19 @@ def main(args,select):
 
 
 if __name__ == "__main__":
+    # 创建 ArgumentParser 对象
+    parser = argparse.ArgumentParser(description="Train script for MPEs.")
 
-        main(sys.argv[1:],1)
+    # 添加 select 参数
+    parser.add_argument(
+        "--select",
+        type=int,
+        required=True,
+        help="Specify the environment selection value."
+    )
+
+    # 解析命令行参数
+    args, unknown_args = parser.parse_known_args()
+
+    # 调用 main 函数
+    main(unknown_args, args.select)
