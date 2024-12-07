@@ -8,11 +8,7 @@ python train.py --select 1
 
 ```
 
-select 0 means experiment_using_fvr_as_fairness_definition; 
-select 1 means experiment_using_min_max_as_fairness_definition
+select 0 means experiment_using_fvr_as_fairness_definition; select 1 means experiment_using_min_max_as_fairness_definition
 
-/data/fairness.npy: fvr budget
-/data/fairness_min_max: min_max budget
-
-/data/utils include a download module to get file dis_CBD_twoPs_03_19.csv by http handler, if you failed because of network error, could download the csv file directly by below share link:
+/data/utils include a download module to fetch the file 'dis_CBD_twoPs_03_19.csv' by http handler. if you failed to download, could download the csv file directly by below share link:
 https://1drv.ms/u/s!AlDeipOkaENXazCoXrgWvD0uaX0?e=WA3imt
